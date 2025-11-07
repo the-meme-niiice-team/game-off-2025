@@ -14,3 +14,7 @@ config/name="Poseidon"
 run/main_scene="uid://dpqr7i0kfsylf"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"

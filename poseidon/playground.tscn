@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpqr7i0kfsylf"]
+[gd_scene load_steps=8 format=3 uid="uid://dpqr7i0kfsylf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_edjgo"]
 sky_top_color = Color(0.09985284, 0.67189306, 0.96259046, 1)
@@ -11,9 +11,55 @@ sky_material = SubResource("ProceduralSkyMaterial_edjgo")
 background_mode = 2
 sky = SubResource("Sky_rupst")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_edjgo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rupst"]
+noise = SubResource("FastNoiseLite_edjgo")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt17y"]
+transparency = 1
+depth_draw_mode = 1
+albedo_color = Color(0.24313726, 0.5686275, 0.827451, 0.5411765)
+roughness = 0.0
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_rupst")
+refraction_enabled = true
+refraction_texture = SubResource("NoiseTexture2D_rupst")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8u5f"]
+material = SubResource("StandardMaterial3D_wt17y")
+size = Vector3(70, 5, 70)
+
 [node name="Playground" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9998365, 0.018080626, 0, -0.018080626, 0.9998365, 0, 9.253791, 36.84725)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wt17y")
+
+[node name="arena" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="arena"]
+radius = 30.0
+height = 5.0
+sides = 36
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2248278, 0)
+operation = 2
+radius = 25.0
+height = 6.0
+sides = 32
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9309093, 0, -0.36525053, 0.08776821, -0.97069967, 0.2236937, -0.35454857, -0.24029592, -0.9036333, 0, 0, 0)
+
+[node name="water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5876555, 0)
+mesh = SubResource("BoxMesh_m8u5f")
