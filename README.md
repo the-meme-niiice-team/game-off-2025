@@ -9,3 +9,5 @@ to import:
     - Launch Godot
     - Click Import
     - Select the project.godot file
+
+<img width="480" height="480" alt="image" src="https://github.com/user-attachments/assets/8029d680-790d-4960-9d9f-9ca875befa8a" />
